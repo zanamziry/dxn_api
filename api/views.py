@@ -6,13 +6,13 @@ from DXNAutopilot.DataCollector import Collector
 from django.core.handlers.wsgi import WSGIRequest
 #{"id":"141100033", "username":"duhok", "password":"zxcv1010"}
 # Create your views here.
-def inventory(request:WSGIRequest, id:str, date:str):
+def inventory(request:WSGIRequest, id:str, date:str=datetime.strftime(datetime.now(),'%d-%m-%Y')):
     #jsonb = json.loads(request.body.decode('utf-8'))
     agent = Agents.objects.get(id=id)
     c = Collector(agent.id, agent.username, agent.password)
     date = datetime.strptime(date,"%d-%m-%Y")
     jsonD:dict = c.GetInventoryReport(DateOfReport=date)
-    return JsonResponse(jsonD,safe=False)
+    return JsonResponse(jsonD)
 
 def addAgent(request:WSGIRequest):
     data = json.loads(request.body)
