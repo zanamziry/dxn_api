@@ -2,16 +2,15 @@ from datetime import datetime
 import json
 from django.http import HttpResponse, JsonResponse
 from api.models import Agent
-from DXNAutopilot.DataCollector import Collector
+import DataCollector
 from django.core.handlers.wsgi import WSGIRequest
 #{"id":"141100033", "username":"duhok", "password":"zxcv1010"}
 # Create your views here.
 
-def inventory(request:WSGIRequest, id:str):
-    #jsonb = json.loads(request.body.decode('utf-8'))
-    print(request.query_params)
+def inventory(request:WSGIRequest, id:str, date:str):
+    #print(request.query_params)
     agent = Agent.objects.get(id=id)
-    c = Collector(agent.id, agent.username, agent.password)
+    c = DataCollector.Collector(agent.id, agent.username, agent.password)
     date = datetime.strptime(date,"%d-%m-%Y")
     jsonD:dict = c.GetInventoryReport(DateOfReport=date)
     return JsonResponse(jsonD)
