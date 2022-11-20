@@ -3,3 +3,4 @@ api/migrations/*
 dxn_api/__pycache__
 captcha.png
 db.sqlite3
+DXNAutopilot/
