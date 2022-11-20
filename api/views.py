@@ -7,9 +7,8 @@ from django.core.handlers.wsgi import WSGIRequest
 #{"id":"141100033", "username":"duhok", "password":"zxcv1010"}
 # Create your views here.
 
-def inventory(request:WSGIRequest, id:str):
+def inventory(request, id:str, date:str):
     #jsonb = json.loads(request.body.decode('utf-8'))
-    print(request.query_params)
     agent = Agent.objects.get(id=id)
     c = Collector(agent.id, agent.username, agent.password)
     date = datetime.strptime(date,"%d-%m-%Y")
