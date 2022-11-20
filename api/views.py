@@ -1,31 +1,49 @@
 from datetime import datetime
-import json
-from django.http import HttpResponse, JsonResponse
-from api.models import Agent
-import DataCollector
+from rest_framework.response import Response
+from rest_framework.request import Request
+from rest_framework.decorators import api_view
+from api.models import Agent, Product
+from DXNAutopilot.DataCollector import Collector
 from django.core.handlers.wsgi import WSGIRequest
 #{"id":"141100033", "username":"duhok", "password":"zxcv1010"}
 # Create your views here.
 
-def inventory(request:WSGIRequest, id:str, date:str):
-    #print(request.query_params)
+@api_view(['GET'])
+def inventory(request:Request, id:str):
+    """ Return a list of products available with Agents ID  //  
+        specific Date Example: 'date=20-11-2022' to specify the date of the inventory list
+    """
+    date = None
+    try:
+        date = datetime.strptime(request.query_params['date'],"%d-%m-%Y")
+    except Exception:
+        date = datetime.now()
     agent = Agent.objects.get(id=id)
-    c = DataCollector.Collector(agent.id, agent.username, agent.password)
-    date = datetime.strptime(date,"%d-%m-%Y")
+    c = Collector(agent.id, agent.username, agent.password)
     jsonD:dict = c.GetInventoryReport(DateOfReport=date)
-    return JsonResponse(jsonD)
+    return Response(jsonD)
 
-def getAgentInfo(request:WSGIRequest, id):
+@api_view(['GET'])
+def getAgentInfo(request:Request, id):
+    """ This Is A Test """
     t = Agent.objects.get(id=id)
-    return HttpResponse(t.id)
+    return Response(t.id)
 
-def getAllAgents(request:WSGIRequest):
+@api_view(['GET'])
+def getAllAgents(request:Request):
+    """ Get A List Of Agents Available """
     t = Agent.objects.all()
-    jsonObj = {'list' : []}
+    jsonObj = {'agents' : []}
     for i in t:
         a = {
         'id' : i.id,
         'username' : i.username,
         }
-        jsonObj['list'].append(a)
-    return JsonResponse(jsonObj)
+        jsonObj['agents'].append(a)
+    return Response(jsonObj)
+
+@api_view(['GET'])
+def getProducts(request:Request):
+    """ Get A List Of Products """
+    t = Product.objects.all()
+    return Response(t.values())

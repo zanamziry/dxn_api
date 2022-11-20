@@ -4,7 +4,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('inventory/<str:id>/<str:date>/', views.inventory, name='inventory'),
-    path('agent/<str:id>/', views.getAgentInfo, name='getAgentInfo'),
-    path('getAll/',views.getAllAgents, name='getAllAgents'),
+    path('inventory/<str:id>/', views.inventory, name='Inventory'),
+    path('agent/<str:id>/', views.getAgentInfo, name='Get Agent Info'),
+    path('agent/',views.getAllAgents, name='Get All Agents'),
+    path('',views.getProducts, name='Get All Products'),
 ]

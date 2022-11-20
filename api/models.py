@@ -9,4 +9,12 @@ class Agent(models.Model):
 
     def __str__(self) -> str:
         return f'{self.id} : {self.username}'
-    
+
+class Product(models.Model):
+    id = models.CharField(max_length=12,primary_key=True)
+    name = models.CharField(max_length=128)
+    name_ar = models.CharField(max_length=128,blank=True,null=True)
+    price = models.DecimalField(decimal_places=2,max_digits=6)
+
+    def __str__(self) -> str:
+        return f'{self.id} : {self.name}'
