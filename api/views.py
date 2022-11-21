@@ -27,23 +27,16 @@ def inventory(request:Request, id:str):
 def getAgentInfo(request:Request, id):
     """ This Is A Test """
     t = Agent.objects.get(id=id)
-    return Response(t.id)
+    return Response(t.jsonSerializable())
 
 @api_view(['GET'])
 def getAllAgents(request:Request):
     """ Get A List Of Agents Available """
-    t = Agent.objects.all()
-    jsonObj = {'agents' : []}
-    for i in t:
-        a = {
-        'id' : i.id,
-        'username' : i.username,
-        }
-        jsonObj['agents'].append(a)
-    return Response(jsonObj)
+    ag_list = Agent.objects.all().values('id','username')
+    return Response(ag_list)
 
 @api_view(['GET'])
 def getProducts(request:Request):
     """ Get A List Of Products """
-    t = Product.objects.all()
-    return Response(t.values())
+    pr_list = Product.objects.all()
+    return Response(pr_list.values())

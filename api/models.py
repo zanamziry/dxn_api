@@ -7,6 +7,9 @@ class Agent(models.Model):
     username = models.CharField(max_length=64)
     password = models.CharField(max_length=64)
 
+    def jsonSerializable(self):
+        return {'id' : self.id, 'username':self.username}
+        
     def __str__(self) -> str:
         return f'{self.id} : {self.username}'
 
