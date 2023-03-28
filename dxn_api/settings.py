@@ -28,10 +28,10 @@ environ.Env.read_env()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 #django-insecure-m4=uae13#1az0vn#10tvga)y)2_if(=9q6x(y6o#3dad#)!971
-SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
+SECRET_KEY = 'django-insecure-m4=uae13#1az0vn#10tvga)y)2_if(=9q6x(y6o#3dad#)!971'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'RENDER' not in os.environ
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -84,17 +84,11 @@ WSGI_APPLICATION = 'dxn_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
-}
-'''
-
-DATABASES = {
-    'default': dj_database_url.parse(env('DATABASE_URL'))
 }
 
 # Password validation
