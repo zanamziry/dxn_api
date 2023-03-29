@@ -2,3 +2,5 @@ api/__pycache__
 dxn_api/__pycache__
 captcha.png
 DXNAutopilot/__pycache__
+db.sqlite3
+assets/
