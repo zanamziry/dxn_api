@@ -1,0 +1,9 @@
+beautifulsoup4==4.11.1
+Django==3.2.7
+djangorestframework==3.14.0
+matplotlib==3.5.0
+pytesseract==0.3.10
+requests==2.26.0
+django-environ==0.10.0
+whitenoise==6.4.0
+django_import_export==3.1.0

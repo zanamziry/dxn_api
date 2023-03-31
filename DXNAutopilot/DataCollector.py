@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import Final
 from bs4 import BeautifulSoup as BS4
+import time
 import json
 import requests
 import pytesseract
@@ -16,6 +17,7 @@ class Collector:
     captchaNumber = 0
     seasonData = None
     S: requests.Session = None
+
     def __init__(self, agent_code:str, username:str, passwd:str) -> None:
         self.agent_code = agent_code
         self.username = username
@@ -56,7 +58,6 @@ class Collector:
     def ReadCaptcha(self) -> str:
         url = self.BASE_URL + f'/captcha2/CaptchaImage.php?uid=54;{self.getUID()}'
         resp = self.S.get(url).content
-        __path__
         f = open(self.CaptchaFile, "wb")
         f.write(resp)
         f.close()
