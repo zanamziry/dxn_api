@@ -18,7 +18,8 @@ class Product(models.Model):
     name = models.CharField(max_length=128)
     name_ar = models.CharField(max_length=128,blank=True,null=True)
     price = models.DecimalField(decimal_places=2,max_digits=6)
-    pv  = models.DecimalField(null=True, decimal_places=2,max_digits=5)
+    old_price = models.DecimalField(decimal_places=2,max_digits=6)
+    pv = models.DecimalField(null=True, decimal_places=2,max_digits=5)
 
     def __str__(self) -> str:
         return f'{self.id} : {self.name}'
