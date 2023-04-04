@@ -5,7 +5,6 @@ from rest_framework.decorators import api_view
 from api.models import Agent, Product
 from DXNAutopilot.DataCollector import Collector
 from django.core.handlers.wsgi import WSGIRequest
-#{"id":"141100033", "username":"duhok", "password":"zxcv1010"}
 # Create your views here.
 
 @api_view(['GET'])
@@ -24,19 +23,13 @@ def inventory(request:Request, id:str):
     return Response(jsonD)
 
 @api_view(['GET'])
-def getAgentInfo(request:Request, id):
-    """ This Is A Test """
-    t = Agent.objects.get(id=id)
-    return Response(t.jsonSerializable())
-
-@api_view(['GET'])
 def getAllAgents(request:Request):
     """ Get A List Of Agents Available """
-    ag_list = Agent.objects.all().values('id','username')
+    ag_list = Agent.objects.all().values('id','username').order_by('id')
     return Response(ag_list)
 
 @api_view(['GET'])
 def getProducts(request:Request):
     """ Get A List Of Products """
-    pr_list = Product.objects.all()
+    pr_list = Product.objects.all().order_by('id')
     return Response(pr_list.values())
