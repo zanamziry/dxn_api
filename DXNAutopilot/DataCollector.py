@@ -1,11 +1,6 @@
 from datetime import datetime
-from typing import Final
 from bs4 import BeautifulSoup as BS4
-import time
-import json
 import requests
-import pytesseract
-import matplotlib.image as mpimg
 
 class Collector:
     agent_code = ''
@@ -23,48 +18,9 @@ class Collector:
         self.username = username
         self.passwd = passwd
         self.S = requests.Session()
-        self.seasonData = self.getCaptchaData()
-        self.captchaNumber = self.ReadCaptcha().replace('\n','')
         self.Login()
         return
     
-    def getCaptchaData(self):
-        url = self.BASE_URL + "/module/relod_kecap.php"
-        resp = self.S.get(url)
-        return json.loads(resp.content)
-
-    def getCID(self) -> str:
-        return self.seasonData["cid"]
-    
-    def getUID(self) -> str:
-        return self.seasonData["uid"]
-    
-    def GetStatus(self,DateOfReport:datetime=datetime.now()) -> bool:
-        url = self.BASE_URL + '/module/mnu_pro_check_allow_date.php'
-        date = self.DateFormat(DateOfReport)
-        data = {
-           'txtTgl1': date,
-           'txtTgl2': date,
-           'txt_scid': 'x',
-           'sc_checking': 0,
-           'localdate':date
-        }
-        resp = self.S.get(url, data=data).json()
-        if(resp['xstatus'] == 'true'):
-            return True
-        else:
-            return False
-
-    def ReadCaptcha(self) -> str:
-        url = self.BASE_URL + f'/captcha2/CaptchaImage.php?uid=54;{self.getUID()}'
-        resp = self.S.get(url).content
-        f = open(self.CaptchaFile, "wb")
-        f.write(resp)
-        f.close()
-        image = mpimg.imread(self.CaptchaFile, 0)
-        pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-        return pytesseract.image_to_string(image, lang='eng',config='--psm 6')
-        
     def Login(self):
         url = self.BASE_URL + '/login.php'
         data = {
@@ -72,8 +28,8 @@ class Collector:
             'usertype': 0,
             'txt_user': self.username,
             'txt_pass': self.passwd,
-            'uid':self.captchaNumber,
-            'cid':self.getCID()
+            'uid': '4666',
+            'cid': 'Z72gzzYkh24GZ3esQjxnhNHP/AOQyIeTtXDZzOlNMRE='
             }
         return self.S.post(url,params=data)
 
