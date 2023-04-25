@@ -11,7 +11,7 @@ class Collector:
     BASE_URL = "https://obs3.dxn2u.com/gulf"
     captchaNumber = 0
     seasonData = None
-    S: requests.Session = None
+    S: requests.Session
 
     def __init__(self, agent_code:str, username:str, passwd:str) -> None:
         self.agent_code = agent_code
