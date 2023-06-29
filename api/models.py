@@ -2,16 +2,19 @@ from enum import unique
 from django.db import models
 
 # Create your models here.
-class Agent(models.Model):
+class ServiceCenter(models.Model):
     id = models.CharField(max_length=10, primary_key=True)
+    name = models.CharField(max_length=64)
+            
+    def __str__(self) -> str:
+        return f'{self.id} : {self.name}'
+
+class Agent(models.Model):
     username = models.CharField(max_length=64)
     password = models.CharField(max_length=64)
-
-    def jsonSerializable(self):
-        return {'id' : self.id, 'username':self.username}
-        
+            
     def __str__(self) -> str:
-        return f'{self.id} : {self.username}'
+        return self.username
 
 class Product(models.Model):
     id = models.CharField(max_length=12,primary_key=True)
