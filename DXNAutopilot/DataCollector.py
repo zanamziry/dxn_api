@@ -63,7 +63,7 @@ class Collector:
             'txt_code': agent_id,
             'txtTgl1' : date,
             'txtTgl2' : date,
-            'cbo_prd' : 1,
+            'cbo_prd' : 0,
             'prd_from' : ProductCode,
             'prd_to': ProductCode,
         }
