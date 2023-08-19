@@ -6,3 +6,4 @@ django-environ
 whitenoise
 django_import_export
 python-dotenv
+django-cors-headers

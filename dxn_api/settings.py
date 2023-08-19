@@ -27,7 +27,7 @@ if(SECRET_KEY == None):
     SECRET_KEY = dotenv.dotenv_values('.env')['KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -44,12 +44,14 @@ INSTALLED_APPS = [
     'rest_framework',
     'api',
     'DXNAutopilot',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -77,7 +79,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dxn_api.wsgi.application'
 
-
+CORS_ALLOW_ALL_ORIGINS = True
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 

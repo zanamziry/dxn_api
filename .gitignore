@@ -6,3 +6,7 @@ db.sqlite3
 assets/
 .vscode
 .env
+pyvenv.cfg
+bin/
+lib/
+share/
