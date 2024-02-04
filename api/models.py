@@ -28,7 +28,7 @@ class Product(models.Model):
     def __str__(self) -> str:
         return f'{self.id} : {self.name}'
 
-class SiteSettings(models.Model):
+class SiteSetting(models.Model):
     dollarvalue = models.DecimalField(decimal_places=2,max_digits=6)
 
     def __str__(self) -> str:
