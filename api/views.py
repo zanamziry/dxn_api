@@ -2,7 +2,7 @@ from datetime import datetime
 from rest_framework.response import Response
 from rest_framework.request import Request
 from rest_framework.decorators import api_view
-from api.models import Agent, Product ,ServiceCenter
+from api.models import Agent, Product ,ServiceCenter, SiteSetting
 from api.serializers import AgentSerializer
 from DXNAutopilot.DataCollector import Collector
 from django.core.handlers.wsgi import WSGIRequest
@@ -37,6 +37,12 @@ def inventory(request, id:str):
 def getAllCenters(request:Request):
     """ Get A List Of Agents Available """
     ag_list = ServiceCenter.objects.all().values('id','name').order_by('id')
+    return Response(ag_list)
+
+@api_view(['GET'])
+def getDollarValue(request:Request):
+    """ Get USD/IQD Price """
+    ag_list = SiteSetting.objects.all().values('dollarvalue').last()
     return Response(ag_list)
 
 @api_view(['GET'])
