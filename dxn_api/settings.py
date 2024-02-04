@@ -27,7 +27,7 @@ if(SECRET_KEY == None):
     SECRET_KEY = dotenv.dotenv_values('.env')['KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
