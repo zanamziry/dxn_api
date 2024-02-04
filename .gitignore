@@ -1,5 +1,6 @@
 api/__pycache__
 dxn_api/__pycache__
+api/migrations/__pycache__
 captcha.png
 DXNAutopilot/__pycache__
 db.sqlite3
@@ -10,3 +11,4 @@ pyvenv.cfg
 bin/
 lib/
 share/
+Scripts/

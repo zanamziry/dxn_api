@@ -23,6 +23,13 @@ class Product(models.Model):
     price = models.DecimalField(decimal_places=2,max_digits=6)
     old_price = models.DecimalField(decimal_places=2,max_digits=6)
     pv = models.DecimalField(null=True, decimal_places=2,max_digits=5)
+    hide = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return f'{self.id} : {self.name}'
+
+class SiteSettings(models.Model):
+    dollarvalue = models.DecimalField(decimal_places=2,max_digits=6)
+
+    def __str__(self) -> str:
+        return f'1$ = {self.dollarvalue}'
