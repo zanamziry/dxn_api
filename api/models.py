@@ -7,7 +7,7 @@ class ServiceCenter(models.Model):
     name = models.CharField(max_length=64)
             
     def __str__(self) -> str:
-        return f'{self.id} : {self.name}'
+        return self.name
 
 class Agent(models.Model):
     username = models.CharField(max_length=64)
@@ -17,21 +17,20 @@ class Agent(models.Model):
         return self.username
 
 class Product(models.Model):
-    id = models.CharField(max_length=12,primary_key=True)
-    name = models.CharField(max_length=128)
-    name_ar = models.CharField(max_length=128,blank=True,null=True)
-    price = models.DecimalField(decimal_places=2,max_digits=6)
-    old_price = models.DecimalField(decimal_places=2,max_digits=6)
-    pv = models.DecimalField(null=True, decimal_places=2,max_digits=5)
-    available = models.BooleanField(default=True)
-    image = models.ImageField(null=True, blank=True)
-    hide = models.BooleanField(default=False)
+    id = models.CharField(max_length=12,primary_key=True,verbose_name="ID")
+    name = models.CharField(max_length=128,verbose_name="Name")
+    name_ar = models.CharField(max_length=128,blank=True,null=True,verbose_name="Arabic Name")
+    price = models.DecimalField(decimal_places=2,max_digits=6,verbose_name="Price")
+    old_price = models.DecimalField(decimal_places=2,max_digits=6, verbose_name="Old Price")
+    pv = models.DecimalField(null=True, decimal_places=2,max_digits=5,verbose_name="Points")
+    available = models.BooleanField(default=True,verbose_name="Available")
+    image = models.ImageField(null=True, blank=True, upload_to = 'products/' ,verbose_name="Picture")
+    hide = models.BooleanField(default=False,verbose_name="Hidden")
 
     def __str__(self) -> str:
-        return f'{self.id} : {self.name}'
+        return self.name
 
 class SiteSetting(models.Model):
-    dollarvalue = models.DecimalField(decimal_places=2,max_digits=6)
-
+    dollarvalue = models.DecimalField(decimal_places=2,max_digits=6,verbose_name="$1 Value")
     def __str__(self) -> str:
-        return f'1$ = {self.dollarvalue}'
+        return self.dollarvalue

@@ -27,7 +27,7 @@ if(SECRET_KEY == None):
     SECRET_KEY = dotenv.dotenv_values('.env')['KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -126,8 +126,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'assets'
+STATIC_URL = '/assets/'
+MEDIA_URL = '/uploads/'
+STATIC_ROOT = Path.joinpath(BASE_DIR, 'assets')
+MEDIA_ROOT = Path.joinpath(BASE_DIR, 'uploads')
+
+STATICFILES_DIRS = (
+    Path.joinpath(BASE_DIR, 'static'),
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
