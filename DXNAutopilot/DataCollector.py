@@ -55,6 +55,13 @@ class Collector:
         else:
             return True
 
+
+    """
+    # Edit Member Info
+        /membership/fmnt_edit.php
+        del_sign=&_from=LST&_notfill=1&txt_memid=&txt_taxid=&txt_memname=&id=141100033&nsearch=&fpage=0
+    """            
+
     def GetInventoryReport(self, agent_id:str, ProductCode:str="", DateOfReport:datetime=datetime.now()):
         date = self.DateFormat(DateOfReport)
         params = {

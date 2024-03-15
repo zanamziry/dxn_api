@@ -23,6 +23,8 @@ class Product(models.Model):
     price = models.DecimalField(decimal_places=2,max_digits=6)
     old_price = models.DecimalField(decimal_places=2,max_digits=6)
     pv = models.DecimalField(null=True, decimal_places=2,max_digits=5)
+    available = models.BooleanField(default=True)
+    image = models.ImageField(default=None)
     hide = models.BooleanField(default=False)
 
     def __str__(self) -> str:
